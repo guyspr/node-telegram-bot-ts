@@ -9,9 +9,11 @@ import { CommandList } from './CommandList'; // Contains all active commands
  */
 class App {
   private commands: ICommand[];
+  
   constructor(commands: ICommand[]) {
     this.commands = commands;
   }
+
   public run(query: string, msg, reply): void{
     for (var index = 0; index < this.commands.length; index++) {
       var cmd = this.commands[index];

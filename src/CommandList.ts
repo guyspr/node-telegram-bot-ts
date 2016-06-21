@@ -5,8 +5,10 @@
 import { ICommand } from './Commands/ICommand';
 import { HelloWorld } from './Commands/HelloWorld';
 import { Echo } from './Commands/Echo';
+import { Forecast } from './Commands/Forecast';
 
 export let CommandList: ICommand[] = [
   new HelloWorld(),
-  new Echo()
+  new Echo(),
+  new Forecast()
 ];

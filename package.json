@@ -19,6 +19,8 @@
   "author": "Guy Spronck",
   "license": "MIT",
   "dependencies": {
-    "botgram": "git+https://github.com/jmendeth/node-botgram.git"
+    "botgram": "git+https://github.com/jmendeth/node-botgram.git",
+    "forecast": "^0.2.1",
+    "node-geocoder": "^3.12.0"
   }
 }
