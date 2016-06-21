@@ -1,7 +1,7 @@
 import { ICommand } from './ICommand';
 
 export class Echo implements ICommand {
-  command = /echo/;
+  command = /echo$/;
   help = "Echo's the text given as arguments";
   usage = "Usage: /echo [text]";
 
