@@ -1,0 +1,11 @@
+# configuration
+config.json
+
+# compiled files
+dist
+
+# Dependency directories
+node_modules
+
+# Optional npm cache directory
+.npm
