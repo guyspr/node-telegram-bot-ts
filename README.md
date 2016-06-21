@@ -16,9 +16,11 @@ Create a `config.json` file in the root directory of this repo containing the fo
     "apiKey": "OPTIONAL_API_KEY"
   },
 
-  "superusers": [] // List of superuser IDs
+  "superusers": []
 }
 ```
+
+Make sure to fill in all parameters.
 
 ## Running
 
@@ -26,4 +28,3 @@ Make sure the TypeScript compiler is installed using `npm install -g typescript`
 
 When TypeScript is installed use `npm install` to install required modules and use `npm start` to run the bot (automatically compiles and runs the bot).
 
- 
