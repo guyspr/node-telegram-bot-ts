@@ -1,7 +1,7 @@
 /// <reference path="../typings/node.d.ts"/>
 var botgram = require('botgram');
 import { Config } from './config'; // Contains application configuration
-import { ICommand } from './ICommand';
+import { ICommand } from './Commands/ICommand';
 import { CommandList } from './CommandList'; // Contains all active commands
 
 /**
@@ -29,6 +29,5 @@ console.log("Bot is up and running!");
 
 // Catch-all for commands
 bot.command(function(msg, reply, next) {
-  console.log(msg)
   application.run(msg.command, msg, reply);
 });
