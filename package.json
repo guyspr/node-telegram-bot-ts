@@ -1,0 +1,21 @@
+{
+  "name": "node-telegram-bot-ts",
+  "version": "1.0.0",
+  "description": "A Telegram bot written using TypeScript",
+  "main": "app.js",
+  "scripts": {
+    "start": "tsc && node dist/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@git.sprofix.com:guyspronck/node-telegram-bot-ts.git"
+  },
+  "keywords": [
+    "telegram",
+    "bot",
+    "node",
+    "typescript"
+  ],
+  "author": "Guy Spronck",
+  "license": "MIT"
+}

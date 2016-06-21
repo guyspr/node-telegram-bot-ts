@@ -2,7 +2,7 @@ import { ICommand } from './ICommand';
 import { CommandList } from './CommandList';
 
 /**
- * App
+ * Base application class, used to run commands
  */
 class App {
   private commands: ICommand[];
