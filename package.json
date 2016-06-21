@@ -17,5 +17,8 @@
     "typescript"
   ],
   "author": "Guy Spronck",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "botgram": "git+https://github.com/jmendeth/node-botgram.git"
+  }
 }
