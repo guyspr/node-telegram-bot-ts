@@ -38,8 +38,10 @@ class App {
 // Bot init + startup
 Dotenv.config(); // Load .env file for configuration
 
-let application = new App(CommandList);
+
 let db:Database = new Database(); 
+let commandList = new CommandList(db);
+let application = new App(commandList.list);
 
 let bot = new botgram(process.env.BOT_TOKEN);
 console.log("Bot is up and running!");
@@ -52,7 +54,5 @@ bot.command(function(msg, reply, next) {
 
 // Message stat tracking
 bot.message(function(msg){
-  var chat: Chat = <Chat>msg.chat;
-  var from: User = <User>msg.from;
-  db.UpdateStats(chat, from);
+  db.UpdateStats(<Chat>msg.chat, <User>msg.from);
 });

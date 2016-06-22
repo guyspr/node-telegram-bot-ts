@@ -4,6 +4,7 @@
   */
 import * as Dotenv from 'dotenv';
 Dotenv.config(); // Load configuration
+import { Database } from './Util/Database';
 
 import { ICommand } from './Commands/ICommand';
 
@@ -13,12 +14,20 @@ import { Emote } from './Commands/Emote';
 import { Forecast } from './Commands/Forecast';
 import { HelloWorld } from './Commands/HelloWorld';
 import { Joke } from './Commands/Joke';
+import { Stats } from './Commands/Stats';
 
-export let CommandList: ICommand[] = [
-  new Doekoe(),
-  new Echo(),
-  new Emote(),
-  new Forecast(process.env.FORECAST_API, process.env.GEOCODE_PROVIDER, process.env.GEOCODE_APIKEY),
-  new HelloWorld(),
-  new Joke()
-];
+export class CommandList{
+  public list: ICommand[];
+  constructor(db:Database){
+    this.list = [
+      new Doekoe(),
+      new Echo(),
+      new Emote(),
+      new Forecast(process.env.FORECAST_API, process.env.GEOCODE_PROVIDER, process.env.GEOCODE_APIKEY),
+      new HelloWorld(),
+      new Joke(),
+      new Stats(db)
+    ];
+  }
+}
+  
