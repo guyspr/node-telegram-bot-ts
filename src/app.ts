@@ -3,6 +3,7 @@ var botgram = require('botgram');
 import * as Dotenv from 'dotenv';
 import { ICommand } from './Commands/ICommand';
 import { CommandList } from './CommandList'; // Contains all active commands
+import { Database, User, Chat } from './Util/Database';
 
 /**
  * Base application class, used to run commands
@@ -38,11 +39,20 @@ class App {
 Dotenv.config(); // Load .env file for configuration
 
 let application = new App(CommandList);
+let db:Database = new Database(); 
 
 let bot = new botgram(process.env.BOT_TOKEN);
 console.log("Bot is up and running!");
 
 // Catch-all for commands
 bot.command(function(msg, reply, next) {
+  
   application.run(msg, reply);
+});
+
+// Message stat tracking
+bot.message(function(msg){
+  var chat: Chat = <Chat>msg.chat;
+  var from: User = <User>msg.from;
+  db.UpdateStats(chat, from);
 });
