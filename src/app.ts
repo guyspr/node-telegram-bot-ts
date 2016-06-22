@@ -48,7 +48,6 @@ console.log("Bot is up and running!");
 
 // Catch-all for commands
 bot.command(function(msg, reply, next) {
-  
   application.run(msg, reply);
 });
 

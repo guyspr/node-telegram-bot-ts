@@ -14,7 +14,7 @@ export interface Chat{
   id: number;
   name: string;
   type: string;
-  users: User[];
+  users: Array<User>;
 }
 
 export class Database {
@@ -50,7 +50,7 @@ export class Database {
         var response = `Stats for *${doc.name}*:\r\n`;
         var sum = 0;
         for(var i = 0; i < doc.users.length; i++){
-          response += `\r\n ${doc.users[i].name} (${doc.users[i].username}): *${doc.users[i].msgcount}*`;
+          response += `\r\n${doc.users[i].name} (${doc.users[i].username}): *${doc.users[i].msgcount}*`;
           sum += doc.users[i].msgcount
         }
 
@@ -65,11 +65,10 @@ export class Database {
     if (chat.type != 'group' && chat.type != 'supergroup'){
       return;
     }
-    this.db.stats.findOne({id: chat.id}, (err:Error, doc: Chat) => {
+    this.db.stats.findOne<Chat>({id: chat.id}, (err:Error, doc: Chat) => {
       if(doc == null){
         // Chat doesn't exist, create it.
         user.msgcount = 1;
-        chat.users = [];
         chat.users.push(user);
         this.db.stats.insert(chat, (err:Error, doc:Chat) => {
           if(err){
@@ -80,10 +79,12 @@ export class Database {
       }else{
         var foundUser: boolean = false;
         for(var i = 0; i < doc.users.length; i++){
-          foundUser = true;
-          // Store new message count and overwrite
-          user.msgcount = doc.users[i].msgcount + 1;
-          doc.users[i] = user;
+          if(doc.users[i].id == user.id){
+            foundUser = true;
+            // Store new message count and overwrite
+            user.msgcount = doc.users[i].msgcount + 1;
+            doc.users[i] = user;
+          }
         }
 
         // Add if user doesn't exist
@@ -92,6 +93,7 @@ export class Database {
           doc.users.push(user);
         }
 
+        // Update in db
         this.db.stats.update<Chat>({id: chat.id}, doc);
       }
     });
