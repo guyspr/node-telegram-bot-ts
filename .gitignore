@@ -16,3 +16,4 @@ npm-debug.log
 
 # typings
 typings
+.env

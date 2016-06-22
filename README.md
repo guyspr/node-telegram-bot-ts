@@ -4,20 +4,14 @@ This repo contains a telegram bot written in typescript.
 
 ## Configuration
 
-Create a `config.ts` file in the `src` directory of this repo containing the following:
+Create a `.env` file in the root directory of this repo containing the following:
 
-```typescript
-export class Config {
-  static token: string = "TOKEN";
-  static forecast: string = "FORECAST";
-
-  static geocode = {
-    provider: "PROVIDER",
-    apiKey: "OPTIONAL KEY"
-  };
-
-  static superusers: number[] = [];
-};
+```
+BOT_TOKEN=abcdefghijklmnopqrstuvwxyz1234567890
+FORECAST_API=abcdefghijklmnopqrstuvwxyz1234567890
+GEOCODE_PROVIDER=google
+GEOCODE_APIKEY=abcdefghijklmnopqrstuvwxyz1234567890
+SUPERUSER=12345678
 ```
 
 Make sure to fill in all parameters.

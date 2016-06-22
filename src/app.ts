@@ -1,6 +1,6 @@
 /// <reference path="../typings/index.d.ts"/>
 var botgram = require('botgram');
-import { Config } from './config'; // Contains application configuration
+import * as Dotenv from 'dotenv';
 import { ICommand } from './Commands/ICommand';
 import { CommandList } from './CommandList'; // Contains all active commands
 
@@ -34,9 +34,12 @@ class App {
   }
 }
 
+// Bot init + startup
+Dotenv.config(); // Load .env file for configuration
+
 let application = new App(CommandList);
 
-let bot = new botgram(Config.token);
+let bot = new botgram(process.env.BOT_TOKEN);
 console.log("Bot is up and running!");
 
 // Catch-all for commands

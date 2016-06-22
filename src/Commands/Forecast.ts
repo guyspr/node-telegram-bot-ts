@@ -1,30 +1,34 @@
 import { ICommand } from './ICommand';
-import { Config } from '../config';
 
 var Fc = require('forecast');
-var geocoder = require('node-geocoder')(Config.geocode.provider, 'https', {apiKey: Config.geocode.apiKey});
 
 export class Forecast implements ICommand {
   command = /forecast$/;
   help = "Shows the forecast for the given location.";
   usage = "Usage: /forecast [location]";
+  fc: any;
+  geocoder: any;
 
-  fc = new Fc({
-    service: 'forecast.io',
-    key: Config.forecast,
-    units: 'celcius', // Only the first letter is parsed 
-    cache: true,      // Cache API requests? 
-    ttl: {            // How long to cache requests. Uses syntax from moment.js: http://momentjs.com/docs/#/durations/creating/ 
-      minutes: 27,
-      seconds: 45
-    }
-  });
+  constructor(forecastApi:string, geocodeProvider: string, geocodeApikey?: string) {
+    this.fc = new Fc({
+      service: 'forecast.io',
+      key: forecastApi,
+      units: 'celcius', // Only the first letter is parsed 
+      cache: true,      // Cache API requests? 
+      ttl: {            // How long to cache requests. Uses syntax from moment.js: http://momentjs.com/docs/#/durations/creating/ 
+        minutes: 27,
+        seconds: 45
+      }
+    });
+    this.geocoder = require('node-geocoder')(geocodeProvider, 'https', { apiKey: geocodeApikey });
+  }
 
   // Gets a forecast using lat, long
   private getForecast(lat:Float32Array, long:Float32Array, city:string, country:string, callback: (msg: string) => any): void{
     this.fc.get([lat,long], function(err, weather){
       if(err){
-        callback("Could not find weather data for this location.");
+        callback(err);
+        return;
       }
       var respString = `The weather in ${city}, ${country} is ${weather.currently.summary} with a temperature of ${weather.currently.temperature} °C`;
       callback(respString);
@@ -39,7 +43,7 @@ export class Forecast implements ICommand {
       return;
     }
 
-    var res = geocoder.geocode(args, (err, res) =>{
+    var res = this.geocoder.geocode(args, (err, res) =>{
       if(err){
         return;
       }
