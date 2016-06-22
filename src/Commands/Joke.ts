@@ -19,7 +19,8 @@ export class Joke implements ICommand {
     }); 
   }
 
-  getJoke(callback: (result:string) => void): void{
+  // Gets a joke from reddit and pushes it to the callback
+  private getJoke(callback: (result:string) => void): void{
     var url = 'https://www.reddit.com/r/jokes.json';
     Request(url, function(error, response, body){
       var parsed = JSON.parse(body).data.children;

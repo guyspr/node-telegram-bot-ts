@@ -20,7 +20,8 @@ export class Forecast implements ICommand {
     }
   });
 
-  getForecast(lat:Float32Array, long:Float32Array, city:string, country:string, callback: (msg: string) => any): void{
+  // Gets a forecast using lat, long
+  private getForecast(lat:Float32Array, long:Float32Array, city:string, country:string, callback: (msg: string) => any): void{
     this.fc.get([lat,long], function(err, weather){
       if(err){
         callback("Could not find weather data for this location.");
