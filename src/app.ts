@@ -1,4 +1,4 @@
-/// <reference path="../typings/node.d.ts"/>
+/// <reference path="../typings/index.d.ts"/>
 var botgram = require('botgram');
 import { Config } from './config'; // Contains application configuration
 import { ICommand } from './Commands/ICommand';
