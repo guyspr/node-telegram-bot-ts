@@ -6,6 +6,7 @@
   },
   "globalDependencies": {
     "dotenv": "registry:dt/dotenv#2.0.0+20160327131627",
+    "nedb": "registry:dt/nedb#0.0.0+20160505185910",
     "node": "registry:env/node#6.0.0+20160610031852"
   }
 }
