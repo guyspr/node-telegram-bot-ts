@@ -86,6 +86,12 @@ export class Database {
           doc.users[i] = user;
         }
 
+        // Add if user doesn't exist
+        if(!foundUser){
+          user.msgcount = 1;
+          doc.users.push(user);
+        }
+
         this.db.stats.update<Chat>({id: chat.id}, doc);
       }
     });
