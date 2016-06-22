@@ -13,3 +13,6 @@ src/config.ts
 
 # Debug stuff
 npm-debug.log
+
+# typings
+typings
