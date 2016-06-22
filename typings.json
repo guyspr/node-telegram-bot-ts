@@ -6,7 +6,6 @@
   },
   "globalDependencies": {
     "dotenv": "registry:dt/dotenv#2.0.0+20160327131627",
-    "jquery": "registry:dt/jquery#1.10.0+20160620094458",
     "node": "registry:env/node#6.0.0+20160610031852"
   }
 }
