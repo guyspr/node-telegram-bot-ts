@@ -3,14 +3,17 @@
   */
 
 import { ICommand } from './Commands/ICommand';
+
 import { HelloWorld } from './Commands/HelloWorld';
 import { Echo } from './Commands/Echo';
 import { Forecast } from './Commands/Forecast';
 import { Joke } from './Commands/Joke';
+import { Doekoe } from './Commands/Doekoe';
 
 export let CommandList: ICommand[] = [
   new HelloWorld(),
   new Echo(),
   new Forecast(),
-  new Joke()
+  new Joke(),
+  new Doekoe()
 ];
