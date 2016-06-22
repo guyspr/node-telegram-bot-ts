@@ -14,7 +14,7 @@ export interface Chat{
   id: number;
   name: string;
   type: string;
-  users: Array<User>;
+  users: User[];
 }
 
 export class Database {
@@ -68,6 +68,7 @@ export class Database {
     this.db.stats.findOne<Chat>({id: chat.id}, (err:Error, doc: Chat) => {
       if(doc == null){
         // Chat doesn't exist, create it.
+        chat.users = [];
         user.msgcount = 1;
         chat.users.push(user);
         this.db.stats.insert(chat, (err:Error, doc:Chat) => {
