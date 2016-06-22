@@ -47,14 +47,14 @@ export class Database {
           return b.msgcount - a.msgcount;
         });
 
-        var response = `Stats for *${doc.name}*:\r\n`;
+        var response = `Stats for <strong>${doc.name}</strong>:\r\n`;
         var sum = 0;
         for(var i = 0; i < doc.users.length; i++){
-          response += `\r\n${doc.users[i].name} (${doc.users[i].username}): *${doc.users[i].msgcount}*`;
+          response += `\r\n${doc.users[i].name} (${doc.users[i].username}): <strong>${doc.users[i].msgcount}</strong>`;
           sum += doc.users[i].msgcount
         }
 
-        response += `\r\n\r\nTotal messages: *${sum}*`;
+        response += `\r\n\r\nTotal messages: <strong>${sum}</strong>`;
         callback(response);
       }
     });
