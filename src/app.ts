@@ -47,7 +47,7 @@ let bot = new botgram(process.env.BOT_TOKEN);
 console.log("Bot is up and running!");
 
 // Catch-all for commands
-bot.command(function(msg, reply, next) {
+bot.command(true, function(msg, reply, next) {
   application.run(msg, reply);
 });
 
