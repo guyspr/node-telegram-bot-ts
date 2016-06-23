@@ -3,6 +3,7 @@ config.json
 
 # compiled files
 dist
+data
 
 # Dependency directories
 node_modules
