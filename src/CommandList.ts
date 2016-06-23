@@ -14,6 +14,7 @@ import { Emote } from './Commands/Emote';
 import { Forecast } from './Commands/Forecast';
 import { HelloWorld } from './Commands/HelloWorld';
 import { Info } from './Commands/Info';
+import { Isup } from './Commands/Isup';
 import { Joke } from './Commands/Joke';
 import { Stats } from './Commands/Stats';
 
@@ -27,6 +28,7 @@ export class CommandList{
       new Forecast(process.env.FORECAST_API, process.env.GEOCODE_PROVIDER, process.env.GEOCODE_APIKEY),
       new HelloWorld(),
       new Info(),
+      new Isup(),
       new Joke(),
       new Stats(db)
     ];
