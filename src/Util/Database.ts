@@ -8,6 +8,7 @@ export interface User{
   lastname: string;
   name: string;
   msgcount: number;
+  birthday?: Date;
 }
 
 export interface Chat{
@@ -25,12 +26,16 @@ export class Database {
   constructor() {
     this.db = {
       stats: new Datastore({
-        filename: 'dist/data/stats.db'
+        filename: 'data/stats.db',
+        autoload: true
       })
     };
-
-    this.db.stats.loadDatabase();
   }
+
+  /**
+    *  All stats commands
+    */
+
 
   // Get a string with statistics
   public GetStats(chat:Chat, callback: (stats:String) => void): void{
@@ -99,5 +104,36 @@ export class Database {
       }
     });
   }
+
+  /**
+    *  All birthday commands
+    */
+  // public GetBirthdays(chat: Chat, callback: (stats: String) => void): void {
+  //   if (chat.type != 'group' && chat.type != 'supergroup') {
+  //     callback("I hope you can remember your birthday yourself! (this command is only available in groups)");
+  //     return;
+  //   }
+  //   this.db.stats.findOne<Chat>({ id: chat.id }, (err: Error, chat: Chat) => {
+  //     if (chat == null) {
+  //       callback("No birthdays available.");
+  //     }else{
+        
+  //     }
+  //   });
+  // }
+
+  // public SetBirthday(chat: Chat, user: User, birthday: Date): void {
+  //   if (chat.type != 'group' && chat.type != 'supergroup') {
+  //     return;
+  //   }
+  //   this.db.stats.findOne<Chat>({ id: chat.id }, (err: Error, doc: Chat) => {
+  //     if(doc == null){
+  //       // Don't to anything yet.
+  //     }else{
+        
+  //       this.db.stats.update<Chat>({ userid: id }, doc);
+  //     }
+  //   });
+  // }
 }
 
