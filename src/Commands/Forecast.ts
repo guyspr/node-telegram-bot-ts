@@ -1,6 +1,14 @@
 import { ICommand } from './ICommand';
+import * as Request from 'request';
+
 
 var Fc = require('forecast');
+
+interface Weather{
+  time: number;
+  summary: string;
+  temperature: number;
+}
 
 export class Forecast implements ICommand {
   command = /forecast$/;
@@ -9,7 +17,11 @@ export class Forecast implements ICommand {
   fc: any;
   geocoder: any;
 
+  url = "https://api.forecast.io/forecast/";
+  apikey: string;
+
   constructor(forecastApi:string, geocodeProvider: string, geocodeApikey?: string) {
+    this.apikey = forecastApi;
     this.fc = new Fc({
       service: 'forecast.io',
       key: forecastApi,
@@ -25,14 +37,26 @@ export class Forecast implements ICommand {
 
   // Gets a forecast using lat, long
   private getForecast(lat:Float32Array, long:Float32Array, city:string, country:string, callback: (msg: string) => any): void{
-    this.fc.get([lat,long], function(err, weather){
-      if(err){
-        callback(err);
-        return;
+    // this.fc.get([lat, long], function(err, weather) {
+    //   if (err) {
+    //     callback(err);
+    //     return;
+    //   }
+    //   var respString = `The weather in ${city}, ${country} is ${weather.currently.summary} with a temperature of ${weather.currently.temperature} °C`;
+    //   callback(respString);
+    // });
+
+    var url = `${this.url}${this.apikey}/${lat},${long}?units=si`;
+    Request(url, function(error, response, body) {
+      var parsed = JSON.parse(body);
+      var weather:Weather[] = <Weather[]>parsed.hourly.data;
+      var forecastString:string = "";
+      for(var i = 1; i < 4; i++){
+        var date = new Date(weather[i].time * 1000);
+        forecastString += `\r\n${date.toLocaleTimeString('en-GB', { hour12: false})}, ${weather[i].summary} with a temperature of ${weather[i].temperature} °C`;
       }
-      var respString = `The weather in ${city}, ${country} is ${weather.currently.summary} with a temperature of ${weather.currently.temperature} °C`;
-      callback(respString);
-    })
+      console.log(forecastString);
+    });
   }
 
   // Implement the execute command
