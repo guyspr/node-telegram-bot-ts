@@ -6,7 +6,7 @@
   "scripts": {
     "prebuild": "typings install",
     "build": "tsc",
-    "test": "npm run build && node dist/app.js",
+    "test": "npm run build",
     "start": "tsc && node dist/app.js"
   },
   "repository": {
