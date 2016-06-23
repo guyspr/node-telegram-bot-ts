@@ -8,6 +8,7 @@ import { Database } from './Util/Database';
 
 import { ICommand } from './Commands/ICommand';
 
+import { Cat } from './Commands/Cat';
 import { Doekoe } from './Commands/Doekoe';
 import { Echo } from './Commands/Echo';
 import { Emote } from './Commands/Emote';
@@ -22,6 +23,7 @@ export class CommandList{
   public list: ICommand[];
   constructor(db:Database){
     this.list = [
+      new Cat(),
       new Doekoe(),
       new Echo(),
       new Emote(),
