@@ -3,7 +3,9 @@
   * Any configuration is also passed to commands from here
   */
 import * as Dotenv from 'dotenv';
-Dotenv.config(); // Load configuration
+if (process.env.ENVIRONMENT != 'test') { // Do not load in test env (Travis)
+  Dotenv.config(); // Load .env file for configuration
+}
 import { Database } from './Util/Database';
 
 import { ICommand } from './Commands/ICommand';

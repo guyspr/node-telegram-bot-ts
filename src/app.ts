@@ -1,6 +1,7 @@
 /// <reference path="../typings/index.d.ts"/>
 var botgram = require('botgram');
 import * as Dotenv from 'dotenv';
+
 import { ICommand } from './Commands/ICommand';
 import { CommandList } from './CommandList'; // Contains all active commands
 import { Database, User, Chat } from './Util/Database';
@@ -36,7 +37,9 @@ class App {
 }
 
 // Bot init + startup
-Dotenv.config(); // Load .env file for configuration
+if (process.env.ENVIRONMENT != 'test') { // Do not load in test env (Travis)
+  Dotenv.config(); // Load .env file for configuration
+}
 
 
 let db:Database = new Database(); 
@@ -45,6 +48,11 @@ let application = new App(commandList.list);
 
 let bot = new botgram(process.env.BOT_TOKEN);
 console.log("Bot is up and running!");
+
+if (process.env.ENVIRONMENT == 'test') { // Kill process after start if success
+  console.log("Start has been succesfull, killing app...");
+  process.exit();
+}
 
 // Catch-all for commands
 bot.command(true, function(msg, reply, next) {
@@ -55,3 +63,4 @@ bot.command(true, function(msg, reply, next) {
 bot.message(function(msg){
   db.UpdateStats(<Chat>msg.chat, <User>msg.from);
 });
+
