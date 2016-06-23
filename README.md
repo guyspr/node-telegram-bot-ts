@@ -1,4 +1,4 @@
-# Node Telegram Bot Typescript
+# Node Telegram Bot Typescript [![Build Status](https://travis-ci.org/guyspronck/node-telegram-bot-ts.svg?branch=master)](https://travis-ci.org/guyspronck/node-telegram-bot-ts)
 
 This repo contains a telegram bot written in typescript.
 
