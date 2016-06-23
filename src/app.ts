@@ -49,11 +49,6 @@ let application = new App(commandList.list);
 let bot = new botgram(process.env.BOT_TOKEN);
 console.log("Bot is up and running!");
 
-if (process.env.ENVIRONMENT == 'test') { // Kill process after start if success
-  console.log("Start has been succesfull, killing app...");
-  process.exit();
-}
-
 // Catch-all for commands
 bot.command(true, function(msg, reply, next) {
   application.run(msg, reply);
@@ -64,3 +59,9 @@ bot.message(function(msg){
   db.UpdateStats(<Chat>msg.chat, <User>msg.from);
 });
 
+
+// Kill process after start if success
+if (process.env.ENVIRONMENT == 'test') { 
+  console.log("Start has been succesfull, killing app...");
+  process.exit();
+}
