@@ -13,7 +13,7 @@ export class Stats implements ICommand {
     // Displays chat statistics
     exec(msg, reply):void {
       this.db.GetStats(<Chat>msg.chat, (stats:String) => {
-        reply.markdown(stats);
+        reply.html(stats);
       });
     }
 }
