@@ -8,6 +8,7 @@ export interface User{
   lastname: string;
   name: string;
   msgcount: number;
+  birthday?: Date;
 }
 
 export interface Chat{
@@ -17,25 +18,15 @@ export interface Chat{
   users: User[];
 }
 
-export interface Birthday{
-  userid: number;
-  birthday: Date;
-}
-
 export class Database {
   db: {
-    stats:Datastore,
-    birthdays: Datastore
+    stats:Datastore
   };
 
   constructor() {
     this.db = {
       stats: new Datastore({
         filename: 'data/stats.db',
-        autoload: true
-      }),
-      birthdays: new Datastore({
-        filename: 'data/birthdays.db',
         autoload: true
       })
     };
@@ -117,20 +108,32 @@ export class Database {
   /**
     *  All birthday commands
     */
+  // public GetBirthdays(chat: Chat, callback: (stats: String) => void): void {
+  //   if (chat.type != 'group' && chat.type != 'supergroup') {
+  //     callback("I hope you can remember your birthday yourself! (this command is only available in groups)");
+  //     return;
+  //   }
+  //   this.db.stats.findOne<Chat>({ id: chat.id }, (err: Error, chat: Chat) => {
+  //     if (chat == null) {
+  //       callback("No birthdays available.");
+  //     }else{
+        
+  //     }
+  //   });
+  // }
 
-  public SetBirthday(id:number, birthday:Date){
-    this.db.birthdays.findOne<Birthday>({ userid: id }, (err: Error, doc: Birthday) => {
-      if(doc == null){
-        var bday: Birthday = {
-          userid: id,
-          birthday: birthday
-        }
-        this.db.birthdays.insert(bday);
-      }else{
-        doc.birthday = birthday;
-        this.db.stats.update<Chat>({ userid: id }, doc);
-      }
-    });
-  }
+  // public SetBirthday(chat: Chat, user: User, birthday: Date): void {
+  //   if (chat.type != 'group' && chat.type != 'supergroup') {
+  //     return;
+  //   }
+  //   this.db.stats.findOne<Chat>({ id: chat.id }, (err: Error, doc: Chat) => {
+  //     if(doc == null){
+  //       // Don't to anything yet.
+  //     }else{
+        
+  //       this.db.stats.update<Chat>({ userid: id }, doc);
+  //     }
+  //   });
+  // }
 }
 
