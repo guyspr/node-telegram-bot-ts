@@ -50,12 +50,13 @@ export class Forecast implements ICommand {
     Request(url, function(error, response, body) {
       var parsed = JSON.parse(body);
       var weather:Weather[] = <Weather[]>parsed.hourly.data;
-      var forecastString:string = "";
+      var currently:Weather = <Weather>parsed.currently;
+      var forecastString:string = `The weather in ${city}, ${country} is ${currently.summary} with a temperature of ${currently.temperature} °C. Here is a forecast for the coming hours: \r\n`;
       for(var i = 1; i < 4; i++){
         var date = new Date(weather[i].time * 1000);
-        forecastString += `\r\n${date.toLocaleTimeString('en-GB', { hour12: false})}, ${weather[i].summary} with a temperature of ${weather[i].temperature} °C`;
+        forecastString += `\r\n[${date.toLocaleTimeString('en-GB', { hour12: false})}] ${weather[i].summary} with a temperature of ${weather[i].temperature} °C`;
       }
-      console.log(forecastString);
+      callback(forecastString);
     });
   }
 
