@@ -4,6 +4,7 @@
   "description": "A Telegram bot written using TypeScript",
   "main": "app.js",
   "scripts": {
+    "test": "tsc",
     "start": "tsc && node dist/app.js"
   },
   "repository": {
@@ -28,6 +29,7 @@
     "request": "^2.72.0"
   },
   "devDependencies": {
+    "typescript": "^1.8.10",
     "typings": "^1.3.0"
   }
 }
