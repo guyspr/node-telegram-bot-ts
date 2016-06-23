@@ -17,20 +17,34 @@ export interface Chat{
   users: User[];
 }
 
+export interface Birthday{
+  userid: number;
+  birthday: Date;
+}
+
 export class Database {
   db: {
-    stats:Datastore
+    stats:Datastore,
+    birthdays: Datastore
   };
 
   constructor() {
     this.db = {
       stats: new Datastore({
-        filename: 'dist/data/stats.db'
+        filename: 'data/stats.db',
+        autoload: true
+      }),
+      birthdays: new Datastore({
+        filename: 'data/birthdays.db',
+        autoload: true
       })
     };
-
-    this.db.stats.loadDatabase();
   }
+
+  /**
+    *  All stats commands
+    */
+
 
   // Get a string with statistics
   public GetStats(chat:Chat, callback: (stats:String) => void): void{
@@ -96,6 +110,25 @@ export class Database {
 
         // Update in db
         this.db.stats.update<Chat>({id: chat.id}, doc);
+      }
+    });
+  }
+
+  /**
+    *  All birthday commands
+    */
+
+  public SetBirthday(id:number, birthday:Date){
+    this.db.birthdays.findOne<Birthday>({ userid: id }, (err: Error, doc: Birthday) => {
+      if(doc == null){
+        var bday: Birthday = {
+          userid: id,
+          birthday: birthday
+        }
+        this.db.birthdays.insert(bday);
+      }else{
+        doc.birthday = birthday;
+        this.db.stats.update<Chat>({ userid: id }, doc);
       }
     });
   }
