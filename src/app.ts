@@ -21,11 +21,6 @@ class App {
   }
 
   public run(msg, reply): void{
-    // Catch /help 
-    if (msg.command.match(/help$/)) {
-      reply.markdown(this.help);
-      return;
-    }
     // Loop trough all possible commands
     for (var index = 0; index < this.commands.length; index++) {
       var cmd = this.commands[index];
