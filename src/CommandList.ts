@@ -12,6 +12,7 @@ import { ICommand } from './Commands/ICommand';
 
 import { Cat } from './Commands/Cat';
 import { Doekoe } from './Commands/Doekoe';
+import { Help } from './Commands/Help';
 import { Echo } from './Commands/Echo';
 import { Emote } from './Commands/Emote';
 import { Forecast } from './Commands/Forecast';
@@ -36,6 +37,8 @@ export class CommandList{
       new Joke(),
       new Stats(db)
     ];
+    // Add help command as last, needs list to create help text.
+    this.list.push(new Help(this.list));
   }
 }
   
