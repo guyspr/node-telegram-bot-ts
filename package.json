@@ -6,7 +6,7 @@
   "scripts": {
     "prebuild": "typings install",
     "build": "tsc",
-    "test": "npm run build && node dist/app.js",
+    "test": "npm run build && mocha dist/test",
     "start": "tsc && node dist/app.js"
   },
   "repository": {
@@ -23,6 +23,7 @@
   "license": "MIT",
   "dependencies": {
     "botgram": "git+https://github.com/jmendeth/node-botgram.git",
+    "chai": "^3.5.0",
     "cool-ascii-faces": "1.3.4",
     "dotenv": "2.0.0",
     "nedb": "1.8.0",
@@ -30,6 +31,7 @@
     "request": "2.72.0"
   },
   "devDependencies": {
+    "mocha": "^2.5.3",
     "typescript": "1.8.10",
     "typings": "1.3.0"
   }
