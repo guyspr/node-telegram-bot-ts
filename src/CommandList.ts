@@ -11,6 +11,7 @@ import { Database } from './Util/Database';
 import { ICommand } from './Commands/ICommand';
 
 import { Cat } from './Commands/Cat';
+import { Chuck } from './Commands/Chuck';
 import { Doekoe } from './Commands/Doekoe';
 import { Help } from './Commands/Help';
 import { Echo } from './Commands/Echo';
@@ -27,6 +28,7 @@ export class CommandList{
   constructor(db:Database){
     this.list = [
       new Cat(),
+      new Chuck(),
       new Doekoe(),
       new Echo(),
       new Emote(),
