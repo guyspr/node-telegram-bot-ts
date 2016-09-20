@@ -13,7 +13,7 @@ export class Forecast implements ICommand {
   usage = "Usage: /forecast [location]";
   geocoder: any;
 
-  url = "https://api.forecast.io/forecast/";
+  url = "https://api.darksky.net/forecast/";
   apikey: string;
 
   constructor(forecastApi:string, geocodeProvider: string, geocodeApikey?: string) {
