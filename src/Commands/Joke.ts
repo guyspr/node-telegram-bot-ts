@@ -21,11 +21,10 @@ export class Joke implements ICommand {
 
   // Gets a joke from reddit and pushes it to the callback
   private getJoke(callback: (result:string) => void): void{
-    var url = 'https://www.reddit.com/r/jokes.json';
+    var url = 'https://www.reddit.com/r/jokes/random.json';
     Request(url, function(error, response, body){
-      var parsed = JSON.parse(body).data.children;
-      var rnd = Math.floor(Math.random() * (parsed.length - 1)) + 1;
-      var joke = <JokeObj>parsed[rnd].data;
+      var parsed = JSON.parse(body)[0].data.children[0];
+      var joke = <JokeObj>parsed.data;
       callback(`*${joke.title}*\r\n${joke.selftext}`);
     });
   }
