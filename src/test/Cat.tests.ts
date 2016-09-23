@@ -1,12 +1,14 @@
 import { Cat } from '../Commands/Cat'
-import chai = require('chai');
+import { expect } from 'chai';
 
 describe('Command: cat', ()=>{
-  it('should give a non empty string', ()=>{
+  it('should give a non empty string', (done)=>{
     var cat = new Cat();
     var reply = {
       text: function(msg:string){
-        chai.assert.equal(true, msg.length > 0);
+        expect(msg.length).to.be.above(0);
+
+        done();
       }
     };
     
