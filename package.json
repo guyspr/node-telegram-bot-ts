@@ -4,7 +4,6 @@
   "description": "A Telegram bot written using TypeScript",
   "main": "app.js",
   "scripts": {
-    "prebuild": "typings install",
     "build": "tsc",
     "test": "npm run build && mocha dist/test",
     "start": "tsc && node dist/app.js"
@@ -22,6 +21,12 @@
   "author": "Guy Spronck",
   "license": "MIT",
   "dependencies": {
+    "@types/chai": "^3.4.33",
+    "@types/dotenv": "^2.0.18",
+    "@types/mocha": "^2.2.32",
+    "@types/nedb": "0.0.31",
+    "@types/node": "^6.0.40",
+    "@types/request": "0.0.31",
     "botgram": "git+https://github.com/jmendeth/node-botgram.git",
     "cool-ascii-faces": "1.3.4",
     "dotenv": "2.0.0",
@@ -32,7 +37,6 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "mocha": "^2.5.3",
-    "typescript": "1.8.10",
-    "typings": "1.3.0"
+    "typescript": "2.0.3"
   }
 }
