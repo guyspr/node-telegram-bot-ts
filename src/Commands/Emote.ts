@@ -1,5 +1,5 @@
 import { ICommand } from './ICommand';
-import * as Cool from 'cool-ascii-faces';
+var Cool = require('cool-ascii-faces')
 
 export class Emote implements ICommand {
   command = /emote$/;
