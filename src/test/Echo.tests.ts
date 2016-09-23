@@ -1,12 +1,14 @@
 import { Echo } from '../Commands/Echo'
-import chai = require('chai');
+import { expect } from 'chai';
 
 describe('Command: echo', () => {
   var echo:Echo = new Echo();
-  it('should return the usage string', () => {
+  it('should return the usage string', (done) => {
     var reply = {
       text: function(msg: string) {
-        chai.assert.equal(echo.usage, msg);
+        expect(msg).to.be.equal(echo.usage);
+        
+        done();
       }
     };
     echo.exec({
@@ -16,11 +18,14 @@ describe('Command: echo', () => {
     }, reply);
   });
 
-  it('should return the echoString', () => {
+  it('should return the echoString', (done) => {
     var echoString = "This should be returned.";
+
     var reply = {
       text: function(msg: string) {
-        chai.assert.equal(echoString, msg);
+        expect(msg).to.be.equal(echoString);
+
+        done();
       }
     };
     echo.exec({
