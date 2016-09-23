@@ -23,9 +23,15 @@ export class Joke implements ICommand {
   private getJoke(callback: (result:string) => void): void{
     var url = 'https://www.reddit.com/r/jokes/random.json';
     Request(url, function(error, response, body){
-      var parsed = JSON.parse(body)[0].data.children[0];
-      var joke = <JokeObj>parsed.data;
-      callback(`*${joke.title}*\r\n${joke.selftext}`);
+      try{
+        var parsed = JSON.parse(body)[0].data.children[0];
+        var joke = <JokeObj>parsed.data;
+        if(joke.title.length > 0){
+          callback(`*${joke.title}*\r\n${joke.selftext}`);
+        }
+      }catch(e){
+        console.log(e);
+      }
     });
   }
 }
