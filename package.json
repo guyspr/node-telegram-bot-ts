@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "build": "tsc",
-    "test": "npm run build && mocha dist/test",
+    "test": "npm run build",
     "start": "tsc && node dist/app.js"
   },
   "repository": {
@@ -21,9 +21,7 @@
   "author": "Guy Spronck",
   "license": "MIT",
   "dependencies": {
-    "@types/chai": "^3.4.33",
     "@types/dotenv": "^2.0.18",
-    "@types/mocha": "^2.2.32",
     "@types/nedb": "0.0.31",
     "@types/node": "^6.0.40",
     "@types/request": "0.0.31",
@@ -35,8 +33,6 @@
     "request": "2.75.0"
   },
   "devDependencies": {
-    "chai": "3.5.0",
-    "mocha": "3.0.2",
     "typescript": "2.0.3"
   }
 }
