@@ -5,6 +5,8 @@ interface Weather{
   time: number;
   summary: string;
   temperature: number;
+  temperatureMin: number;
+  temperatureMax: number;
 }
 
 export class Forecast implements ICommand {
@@ -26,12 +28,20 @@ export class Forecast implements ICommand {
     var url = `${this.url}${this.apikey}/${lat},${long}?units=si`;
     Request(url, function(error, response, body) {
       var parsed = JSON.parse(body);
-      var weather:Weather[] = <Weather[]>parsed.hourly.data;
+      var weatherHourly:Weather[] = <Weather[]>parsed.hourly.data;
+      var weatherDaily:Weather[] = <Weather[]>parsed.daily.data;
       var currently:Weather = <Weather>parsed.currently;
-      var forecastString:string = `The weather in ${city}, ${country} is ${currently.summary} with a temperature of ${currently.temperature} °C. Here is a forecast for the coming hours: \r\n`;
+      var forecastString:string = `In *${city}, ${country}* it is *${currently.summary}* with a temperature of *${currently.temperature} °C*. \r\n\r\nHere is a forecast for the following 3 hours:`;
       for(var i = 1; i < 4; i++){
-        var date = new Date(weather[i].time * 1000);
-        forecastString += `\r\n[${date.toLocaleTimeString('en-GB', { hour12: false})}] ${weather[i].summary} with a temperature of ${weather[i].temperature} °C`;
+        var date = new Date(weatherHourly[i].time * 1000);
+        forecastString += `\r\n*${date.toLocaleTimeString('en-GB', { hour12: false})}* - ${weatherHourly[i].summary} with a temperature of ${weatherHourly[i].temperature} °C`;
+      }
+
+      forecastString += `\r\n\r\nAnd for the following few days:`
+
+      for(var i = 1; i < 4; i++){
+        var date = new Date(weatherDaily[i].time * 1000);
+        forecastString += `\r\n*${date.toLocaleDateString('en-GB', {weekday: 'long'})}* - ${weatherDaily[i].summary} (min *${weatherDaily[i].temperatureMin} °C*, max *${weatherDaily[i].temperatureMax} °C*)`;
       }
       callback(forecastString);
     });
@@ -54,7 +64,7 @@ export class Forecast implements ICommand {
         return;
       }      
       this.getForecast(res[0].latitude,res[0].longitude, res[0].city, res[0].country, function(str){
-        reply.text(str);
+        reply.markdown(str);
       });
     });
   }
