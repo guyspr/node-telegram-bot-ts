@@ -21,6 +21,7 @@ import { HelloWorld } from './Commands/HelloWorld';
 import { Info } from './Commands/Info';
 import { Isup } from './Commands/Isup';
 import { Joke } from './Commands/Joke';
+import { Remindme } from './Commands/Remindme';
 import { Stats } from './Commands/Stats';
 
 export class CommandList{
@@ -37,6 +38,7 @@ export class CommandList{
       new Info(),
       new Isup(),
       new Joke(),
+      new Remindme(),
       new Stats(db)
     ];
     // Add help command as last, needs list to create help text.
